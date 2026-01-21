@@ -1,5 +1,5 @@
 export function App() {
-	return (
+	return () => (
 		<div
 			css={{
 				fontFamily: "system-ui, sans-serif",

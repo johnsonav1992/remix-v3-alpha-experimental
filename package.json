@@ -12,6 +12,7 @@
 		"format": "biome format --write ."
 	},
 	"dependencies": {
+		"@remix-run/component": "^0.3.0",
 		"remix": "^3.0.0-alpha.0"
 	},
 	"devDependencies": {
