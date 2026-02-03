@@ -2,7 +2,7 @@ import type { Handle } from "@remix-run/component";
 
 import { PHYSICS } from "../constants";
 import type { BallData } from "../types";
-import { getRandomColor } from "../utils";
+import { checkBallCollisions, dampVelocity, getRandomColor } from "../utils";
 import { Ball } from "./Ball";
 
 export function BallPit(handle: Handle) {
@@ -30,12 +30,16 @@ export function BallPit(handle: Handle) {
 		const height = containerRef.clientHeight;
 
 		balls.forEach((ball) => {
-			ball.vy += PHYSICS.gravity;
-			ball.vx *= PHYSICS.friction;
-			ball.vy *= PHYSICS.friction;
-
-			ball.x += ball.vx;
-			ball.y += ball.vy;
+			const isGrounded = ball.y + ball.radius >= height - 1;
+			const isMoving = Math.abs(ball.vx) > 0.01 || Math.abs(ball.vy) > 0.01;
+			if (isMoving || !isGrounded) {
+				ball.vy += PHYSICS.gravity;
+				ball.vx *= PHYSICS.friction;
+				ball.vy *= PHYSICS.friction;
+				dampVelocity(ball);
+				ball.x += ball.vx;
+				ball.y += ball.vy;
+			}
 
 			if (ball.x - ball.radius < 0) {
 				ball.x = ball.radius;
@@ -53,6 +57,10 @@ export function BallPit(handle: Handle) {
 				ball.vy = -Math.abs(ball.vy) * PHYSICS.bounce;
 			}
 		});
+		checkBallCollisions(balls);
+		for (const ball of balls) {
+			dampVelocity(ball, 0.15);
+		}
 	};
 
 	const animate = (): void => {
