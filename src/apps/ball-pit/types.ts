@@ -6,4 +6,6 @@ export interface BallData {
 	vy: number;
 	color: string;
 	radius: number;
+	sleeping: boolean;
+	sleepCounter: number;
 }

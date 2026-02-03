@@ -6,16 +6,23 @@ export const getRandomColor = (): string => {
 };
 
 export const handleBallCollision = (ball1: BallData, ball2: BallData): void => {
+	if (ball1.sleeping && ball2.sleeping) return;
 	const dx = ball2.x - ball1.x;
 	const dy = ball2.y - ball1.y;
 	const distance = Math.sqrt(dx * dx + dy * dy);
 	const minDistance = ball1.radius + ball2.radius;
 	if (distance < minDistance) {
-		const ball1AtRest = Math.abs(ball1.vx) < 0.1 && Math.abs(ball1.vy) < 0.1;
-		const ball2AtRest = Math.abs(ball2.vx) < 0.1 && Math.abs(ball2.vy) < 0.1;
-		if (ball1AtRest && ball2AtRest) {
-			return;
+		const ball1Speed = Math.sqrt(ball1.vx * ball1.vx + ball1.vy * ball1.vy);
+		const ball2Speed = Math.sqrt(ball2.vx * ball2.vx + ball2.vy * ball2.vy);
+		if (ball1.sleeping && ball2Speed > 1.0) {
+			ball1.sleeping = false;
+			ball1.sleepCounter = 0;
 		}
+		if (ball2.sleeping && ball1Speed > 1.0) {
+			ball2.sleeping = false;
+			ball2.sleepCounter = 0;
+		}
+		if (ball1.sleeping || ball2.sleeping) return;
 		const angle = Math.atan2(dy, dx);
 		const overlap = minDistance - distance;
 		const separateX = (overlap / 2) * Math.cos(angle);
