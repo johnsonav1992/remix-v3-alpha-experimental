@@ -1,15 +1,39 @@
-export function App() {
-	return () => (
-		<div
-			css={{
-				fontFamily: "system-ui, sans-serif",
-				padding: "2rem",
-				maxWidth: "800px",
-				margin: "0 auto",
-			}}
-		>
-			<h1>Remix v3 Alpha</h1>
-			<p>Welcome to Remix v3.0.0-alpha.0</p>
-		</div>
-	);
+import type { Handle } from '@remix-run/component'
+
+import { BallPit } from './apps/ball-pit/components/BallPit'
+import { Lobby } from './lobby/components/Lobby'
+import { BackButton } from './shared/components/BackButton'
+import type { DemoId } from './shared/types'
+
+export function App(handle: Handle) {
+  let currentDemo: DemoId | null = null
+
+  const selectDemo = (demoId: string): void => {
+    currentDemo = demoId as DemoId
+    handle.update()
+  }
+
+  const backToLobby = (): void => {
+    currentDemo = null
+    handle.update()
+  }
+
+  return () => {
+    if (currentDemo === null) {
+      return <Lobby onSelectDemo={selectDemo} />
+    }
+
+    return (
+      <div
+        css={{
+          position: 'relative',
+          width: '100vw',
+          height: '100vh',
+        }}
+      >
+        <BackButton onClick={backToLobby} />
+        {currentDemo === 'ball-pit' && <BallPit />}
+      </div>
+    )
+  }
 }
