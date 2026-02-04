@@ -1,4 +1,4 @@
-export type DemoId = "ball-pit";
+export type DemoId = "ball-pit" | "tetris";
 
 export type IconComponent = () => () => JSX.Element;
 

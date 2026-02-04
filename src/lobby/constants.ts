@@ -1,4 +1,5 @@
 import { BallIcon } from "../apps/ball-pit/components/BallIcon";
+import { TetrisIcon } from "../apps/tetris/components/TetrisIcon";
 import type { Demo } from "../shared/types";
 
 export const DEMOS: Demo[] = [
@@ -9,5 +10,13 @@ export const DEMOS: Demo[] = [
 			"Click anywhere to throw balls into the pit. Watch them bounce around with realistic physics!",
 		color: "#FFA502",
 		icon: BallIcon,
+	},
+	{
+		id: "tetris",
+		name: "Tetris",
+		description:
+			"Classic block-stacking puzzle game. Use arrow keys to move and rotate, space to drop!",
+		color: "#A55EEA",
+		icon: TetrisIcon,
 	},
 ];
