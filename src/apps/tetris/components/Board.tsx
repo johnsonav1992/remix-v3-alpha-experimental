@@ -18,7 +18,12 @@ export const Board = () => {
 					if (ghostPiece.shape[y][x]) {
 						const boardY = ghostPiece.position.y + y;
 						const boardX = ghostPiece.position.x + x;
-						if (boardY >= 0 && boardY < BOARD_HEIGHT && boardX >= 0 && boardX < BOARD_WIDTH) {
+						if (
+							boardY >= 0 &&
+							boardY < BOARD_HEIGHT &&
+							boardX >= 0 &&
+							boardX < BOARD_WIDTH
+						) {
 							if (renderBoard[boardY][boardX] === null) {
 								renderBoard[boardY][boardX] = `ghost-${ghostPiece.type}` as any;
 							}
@@ -33,7 +38,12 @@ export const Board = () => {
 					if (currentPiece.shape[y][x]) {
 						const boardY = currentPiece.position.y + y;
 						const boardX = currentPiece.position.x + x;
-						if (boardY >= 0 && boardY < BOARD_HEIGHT && boardX >= 0 && boardX < BOARD_WIDTH) {
+						if (
+							boardY >= 0 &&
+							boardY < BOARD_HEIGHT &&
+							boardX >= 0 &&
+							boardX < BOARD_WIDTH
+						) {
 							renderBoard[boardY][boardX] = currentPiece.type;
 						}
 					}
@@ -52,10 +62,13 @@ export const Board = () => {
 			>
 				{renderBoard.map((row, y) =>
 					row.map((cell, x) => {
-						const isGhost = typeof cell === "string" && cell.startsWith("ghost-");
-						const cellValue = isGhost ? cell.replace("ghost-", "") as any : cell;
+						const isGhost =
+							typeof cell === "string" && cell.startsWith("ghost-");
+						const cellValue = isGhost
+							? (cell.replace("ghost-", "") as any)
+							: cell;
 						return <Cell key={`${y}-${x}`} value={cellValue} ghost={isGhost} />;
-					})
+					}),
 				)}
 			</div>
 		);

@@ -52,7 +52,15 @@ export const SHAPES: Record<TetrominoType, number[][]> = {
 	],
 } as const;
 
-export const TETROMINO_TYPES: TetrominoType[] = ["I", "O", "T", "S", "Z", "J", "L"];
+export const TETROMINO_TYPES: TetrominoType[] = [
+	"I",
+	"O",
+	"T",
+	"S",
+	"Z",
+	"J",
+	"L",
+];
 
 export const POINTS = {
 	single: 100,

@@ -1,9 +1,14 @@
-import { BOARD_HEIGHT, BOARD_WIDTH, SHAPES, TETROMINO_TYPES } from "./constants";
+import {
+	BOARD_HEIGHT,
+	BOARD_WIDTH,
+	SHAPES,
+	TETROMINO_TYPES,
+} from "./constants";
 import type { Board, CellValue, Tetromino, TetrominoType } from "./types";
 
 export const createEmptyBoard = (): Board => {
 	return Array.from({ length: BOARD_HEIGHT }, () =>
-		Array.from({ length: BOARD_WIDTH }, () => null)
+		Array.from({ length: BOARD_WIDTH }, () => null),
 	);
 };
 
@@ -37,7 +42,7 @@ export const isValidPosition = (
 	board: Board,
 	piece: Tetromino,
 	offsetX = 0,
-	offsetY = 0
+	offsetY = 0,
 ): boolean => {
 	const { shape, position } = piece;
 	for (let y = 0; y < shape.length; y++) {
@@ -65,7 +70,12 @@ export const placePiece = (board: Board, piece: Tetromino): Board => {
 			if (shape[y][x]) {
 				const boardY = position.y + y;
 				const boardX = position.x + x;
-				if (boardY >= 0 && boardY < BOARD_HEIGHT && boardX >= 0 && boardX < BOARD_WIDTH) {
+				if (
+					boardY >= 0 &&
+					boardY < BOARD_HEIGHT &&
+					boardX >= 0 &&
+					boardX < BOARD_WIDTH
+				) {
 					newBoard[boardY][boardX] = type;
 				}
 			}
@@ -74,11 +84,13 @@ export const placePiece = (board: Board, piece: Tetromino): Board => {
 	return newBoard;
 };
 
-export const clearLines = (board: Board): { board: Board; linesCleared: number } => {
+export const clearLines = (
+	board: Board,
+): { board: Board; linesCleared: number } => {
 	const newBoard = board.filter((row) => row.some((cell) => cell === null));
 	const linesCleared = BOARD_HEIGHT - newBoard.length;
 	const emptyRows: CellValue[][] = Array.from({ length: linesCleared }, () =>
-		Array.from({ length: BOARD_WIDTH }, () => null)
+		Array.from({ length: BOARD_WIDTH }, () => null),
 	);
 	return {
 		board: [...emptyRows, ...newBoard],

@@ -33,7 +33,9 @@ export const Controls = () => {
 
 const ControlRow = () => {
 	return ({ keys, action }: { keys: string; action: string }) => (
-		<div css={{ display: "flex", justifyContent: "space-between", gap: "16px" }}>
+		<div
+			css={{ display: "flex", justifyContent: "space-between", gap: "16px" }}
+		>
 			<span
 				css={{
 					fontSize: "12px",

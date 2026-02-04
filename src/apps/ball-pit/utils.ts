@@ -33,7 +33,8 @@ export const handleBallCollision = (ball1: BallData, ball2: BallData): void => {
 		ball2.y += separateY;
 		const relativeVelX = ball2.vx - ball1.vx;
 		const relativeVelY = ball2.vy - ball1.vy;
-		const dotProduct = relativeVelX * Math.cos(angle) + relativeVelY * Math.sin(angle);
+		const dotProduct =
+			relativeVelX * Math.cos(angle) + relativeVelY * Math.sin(angle);
 		if (dotProduct < 0) {
 			const impulse = (2 * dotProduct) / 2;
 			const impulseX = impulse * Math.cos(angle);

@@ -72,13 +72,25 @@ export const Tetris = (handle: Handle) => {
 		if (isValidPosition(board, rotated)) {
 			currentPiece = rotated;
 		} else if (isValidPosition(board, rotated, -1, 0)) {
-			currentPiece = { ...rotated, position: { ...rotated.position, x: rotated.position.x - 1 } };
+			currentPiece = {
+				...rotated,
+				position: { ...rotated.position, x: rotated.position.x - 1 },
+			};
 		} else if (isValidPosition(board, rotated, 1, 0)) {
-			currentPiece = { ...rotated, position: { ...rotated.position, x: rotated.position.x + 1 } };
+			currentPiece = {
+				...rotated,
+				position: { ...rotated.position, x: rotated.position.x + 1 },
+			};
 		} else if (isValidPosition(board, rotated, -2, 0)) {
-			currentPiece = { ...rotated, position: { ...rotated.position, x: rotated.position.x - 2 } };
+			currentPiece = {
+				...rotated,
+				position: { ...rotated.position, x: rotated.position.x - 2 },
+			};
 		} else if (isValidPosition(board, rotated, 2, 0)) {
-			currentPiece = { ...rotated, position: { ...rotated.position, x: rotated.position.x + 2 } };
+			currentPiece = {
+				...rotated,
+				position: { ...rotated.position, x: rotated.position.x + 2 },
+			};
 		}
 	};
 
@@ -258,7 +270,9 @@ export const Tetris = (handle: Handle) => {
 								{gameOver ? "Game Over" : "Paused"}
 							</div>
 							<div css={{ fontSize: "16px", color: "#FFFBF0" }}>
-								{gameOver ? "Press Enter or Space to restart" : "Press P to resume"}
+								{gameOver
+									? "Press Enter or Space to restart"
+									: "Press P to resume"}
 							</div>
 						</div>
 					)}
