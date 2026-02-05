@@ -105,7 +105,7 @@ export const Tetris = (handle: Handle) => {
 	};
 
 	handle.on(document, {
-		keydown(event) {
+		keydown: (event) => {
 			if (!gameStarted) {
 				if (event.key === "Enter" || event.key === " ") {
 					event.preventDefault();
