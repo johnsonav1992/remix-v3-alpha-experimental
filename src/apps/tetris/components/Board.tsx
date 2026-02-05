@@ -6,11 +6,12 @@ import { Cell } from "./Cell";
 interface BoardProps {
 	board: BoardType;
 	currentPiece: Tetromino | null;
+	showGhost?: boolean;
 }
 
 export const Board = () => {
-	return ({ board, currentPiece }: BoardProps) => {
-		const ghostPiece = currentPiece ? getGhostPiece(board, currentPiece) : null;
+	return ({ board, currentPiece, showGhost = true }: BoardProps) => {
+		const ghostPiece = showGhost && currentPiece ? getGhostPiece(board, currentPiece) : null;
 		const renderBoard = board.map((row) => [...row]);
 		if (ghostPiece) {
 			for (let y = 0; y < ghostPiece.shape.length; y++) {

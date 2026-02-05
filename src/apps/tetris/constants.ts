@@ -2,7 +2,7 @@ import type { TetrominoType } from "./types";
 
 export const BOARD_WIDTH = 10;
 export const BOARD_HEIGHT = 20;
-export const CELL_SIZE = 28;
+export const CELL_SIZE = 30;
 
 export const COLORS: Record<TetrominoType, string> = {
 	I: "#4ECDC4",
