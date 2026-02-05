@@ -4,7 +4,9 @@ import {
 	SHAPES,
 	TETROMINO_TYPES,
 } from "./constants";
-import type { Board, CellValue, Tetromino, TetrominoType } from "./types";
+import type { Board, CellValue, GameState, Tetromino, TetrominoType } from "./types";
+
+export type { GameState } from "./types";
 
 export const createEmptyBoard = (): Board => {
 	return Array.from({ length: BOARD_HEIGHT }, () =>
@@ -171,16 +173,6 @@ export const getHardDropResult = (
 		distance,
 	};
 };
-
-export interface GameState {
-	board: Board;
-	currentPiece: Tetromino | null;
-	nextPieceType: TetrominoType;
-	score: number;
-	level: number;
-	lines: number;
-	gameOver: boolean;
-}
 
 export const createGameState = (startingLevel: number): GameState => {
 	const nextPieceType = getRandomTetromino();

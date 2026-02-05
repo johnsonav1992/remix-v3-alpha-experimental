@@ -18,10 +18,9 @@ export type Board = CellValue[][];
 export interface GameState {
 	board: Board;
 	currentPiece: Tetromino | null;
-	nextPiece: TetrominoType;
+	nextPieceType: TetrominoType;
 	score: number;
 	level: number;
 	lines: number;
 	gameOver: boolean;
-	paused: boolean;
 }
