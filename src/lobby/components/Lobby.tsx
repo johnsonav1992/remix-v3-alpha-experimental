@@ -49,7 +49,7 @@ export function Lobby() {
 								textTransform: "uppercase",
 							}}
 						>
-							Demo Arcade
+							Remix Arcade
 						</h1>
 					</div>
 					<p
@@ -61,7 +61,7 @@ export function Lobby() {
 							maxWidth: "600px",
 						}}
 					>
-						Pick your game and play around with Remix v3 components
+						Pick your game and have a blast!
 					</p>
 				</header>
 				<div
@@ -102,7 +102,7 @@ export function Lobby() {
 							letterSpacing: "1px",
 						}}
 					>
-						Powered by Remix v3.0.0-alpha.0
+						Powered by Remix v3
 					</div>
 				</footer>
 			</div>

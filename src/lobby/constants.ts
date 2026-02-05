@@ -1,4 +1,5 @@
 import { BallIcon } from "../apps/ball-pit/components/BallIcon";
+import { ConnectFourIcon } from "../apps/connect-four/components/ConnectFourIcon";
 import { TetrisIcon } from "../apps/tetris/components/TetrisIcon";
 import type { Demo } from "../shared/types";
 
@@ -18,5 +19,13 @@ export const DEMOS: Demo[] = [
 			"Classic block-stacking puzzle game. Use arrow keys to move and rotate, space to drop!",
 		color: "#A55EEA",
 		icon: TetrisIcon,
+	},
+	{
+		id: "connect-four",
+		name: "Connect Four",
+		description:
+			"Drop pieces to connect four in a row! Play against a friend using mouse clicks or keys 1-7.",
+		color: "#2980B9",
+		icon: ConnectFourIcon,
 	},
 ];

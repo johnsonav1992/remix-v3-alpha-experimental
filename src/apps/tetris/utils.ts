@@ -4,7 +4,13 @@ import {
 	SHAPES,
 	TETROMINO_TYPES,
 } from "./constants";
-import type { Board, CellValue, GameState, Tetromino, TetrominoType } from "./types";
+import type {
+	Board,
+	CellValue,
+	GameState,
+	Tetromino,
+	TetrominoType,
+} from "./types";
 
 export type { GameState } from "./types";
 
