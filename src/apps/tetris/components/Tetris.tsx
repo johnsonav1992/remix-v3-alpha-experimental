@@ -2,8 +2,8 @@ import type { Handle } from "@remix-run/component";
 import { LEVEL_SPEEDS } from "../constants";
 import {
 	createGameState,
-	getHardDropResult,
 	type GameState,
+	getHardDropResult,
 	lockCurrentPiece,
 	tryMove,
 	tryRotate,

@@ -1,12 +1,13 @@
 import type { Handle } from "@remix-run/component";
-import { BOARD_COLS } from "../constants";
-import type { GameState } from "../types";
+import { BOARD_COLS, DROP_ANIMATION_MS } from "../constants";
+import type { FallingPiece, GameState } from "../types";
 import {
 	checkDraw,
 	checkWin,
 	createEmptyBoard,
 	createGameState,
 	dropPiece,
+	getLowestEmptyRow,
 	isColumnFull,
 	switchPlayer,
 } from "../utils";
@@ -17,17 +18,14 @@ export const ConnectFour = (handle: Handle) => {
 	let gameStarted = false;
 	let state: GameState = createGameState();
 	let hoveredCol: number | null = null;
+	let fallingPiece: FallingPiece | null = null;
 
 	const startGame = (): void => {
 		state = createGameState();
 		gameStarted = true;
 	};
 
-	const makeMove = (col: number): void => {
-		if (state.winner || state.isDraw) return;
-		if (col < 0 || col >= BOARD_COLS) return;
-		if (isColumnFull(state.board, col)) return;
-
+	const applyMove = (col: number): void => {
 		const result = dropPiece(state.board, col, state.currentPlayer);
 
 		if (!result) return;
@@ -67,7 +65,32 @@ export const ConnectFour = (handle: Handle) => {
 		};
 	};
 
+	const makeMove = (col: number): void => {
+		if (state.winner || state.isDraw) return;
+		if (col < 0 || col >= BOARD_COLS) return;
+		if (isColumnFull(state.board, col)) return;
+		if (fallingPiece) return;
+
+		const targetRow = getLowestEmptyRow(state.board, col);
+
+		if (targetRow === -1) return;
+
+		fallingPiece = {
+			col,
+			targetRow,
+			player: state.currentPlayer,
+		};
+		handle.update();
+
+		setTimeout(() => {
+			applyMove(col);
+			fallingPiece = null;
+			handle.update();
+		}, DROP_ANIMATION_MS);
+	};
+
 	const playAgain = (): void => {
+		fallingPiece = null;
 		state = {
 			...state,
 			board: createEmptyBoard(),
@@ -109,7 +132,6 @@ export const ConnectFour = (handle: Handle) => {
 				event.preventDefault();
 				const col = parseInt(event.key, 10) - 1;
 				makeMove(col);
-				handle.update();
 			}
 		},
 	});
@@ -130,9 +152,9 @@ export const ConnectFour = (handle: Handle) => {
 			<GameScreen
 				state={state}
 				hoveredCol={hoveredCol}
+				fallingPiece={fallingPiece}
 				onColumnClick={(col) => {
 					makeMove(col);
-					handle.update();
 				}}
 				onColumnHover={(col) => {
 					setHoveredCol(col);

@@ -1,4 +1,4 @@
-import { COLORS } from "../constants";
+import { COLORS, THEME } from "../constants";
 import type { Player } from "../types";
 
 interface PlayerScoreProps {
@@ -15,50 +15,59 @@ const PlayerScore = () => {
 		return (
 			<div
 				css={{
-					display: "flex",
-					flexDirection: "column",
-					alignItems: "center",
-					padding: "12px 24px",
-					borderRadius: 8,
-					transition: "all 0.2s ease",
+					padding: "12px 16px",
+					backgroundColor: THEME.panel,
+					border: `4px solid ${THEME.border}`,
+					textAlign: "center",
+					transition: "all 0.15s ease",
+					minWidth: 80,
 				}}
 				style={{
-					backgroundColor:
-						isCurrentTurn || isWinner
-							? COLORS[player]
-							: "rgba(255, 255, 255, 0.1)",
-					transform: isCurrentTurn ? "scale(1.05)" : "scale(1)",
-					boxShadow: isWinner
-						? `0 0 20px ${COLORS[player]}, 0 0 40px ${COLORS[player]}`
-						: isCurrentTurn
-							? `0 4px 12px rgba(0, 0, 0, 0.3)`
-							: "none",
+					boxShadow: isCurrentTurn
+						? `4px 4px 0 ${COLORS[player]}`
+						: `4px 4px 0 ${THEME.border}`,
+					transform: isCurrentTurn ? "translate(-2px, -2px)" : "none",
 				}}
 			>
 				<div
 					css={{
-						fontSize: 14,
-						fontWeight: 600,
+						fontSize: 12,
+						fontWeight: 700,
 						textTransform: "uppercase",
 						letterSpacing: 1,
+						marginBottom: 4,
 					}}
 					style={{
-						color: isCurrentTurn || isWinner ? "#1a1a2e" : "#FFFBF0",
+						color: COLORS[player],
 					}}
 				>
 					{label}
 				</div>
 				<div
 					css={{
-						fontSize: 32,
-						fontWeight: 700,
+						fontSize: 24,
+						fontWeight: 900,
 					}}
 					style={{
-						color: isCurrentTurn || isWinner ? "#1a1a2e" : COLORS[player],
+						color: isWinner ? COLORS[player] : THEME.textLight,
 					}}
 				>
 					{wins}
 				</div>
+				{isCurrentTurn && !isWinner && (
+					<div
+						css={{
+							fontSize: 10,
+							fontWeight: 700,
+							color: THEME.textLight,
+							textTransform: "uppercase",
+							marginTop: 4,
+							opacity: 0.7,
+						}}
+					>
+						Your turn
+					</div>
+				)}
 			</div>
 		);
 	};
@@ -84,53 +93,44 @@ export const ScorePanel = () => {
 			css={{
 				display: "flex",
 				flexDirection: "column",
-				alignItems: "center",
 				gap: 16,
 			}}
 		>
-			<div
-				css={{
-					display: "flex",
-					gap: 24,
-					alignItems: "center",
-				}}
-			>
-				<PlayerScore
-					player="red"
-					wins={redWins}
-					isCurrentTurn={!winner && !isDraw && currentPlayer === "red"}
-					isWinner={winner === "red"}
-				/>
-				<div
-					css={{
-						fontSize: 24,
-						fontWeight: 700,
-						color: "#FFFBF0",
-					}}
-				>
-					vs
-				</div>
-				<PlayerScore
-					player="yellow"
-					wins={yellowWins}
-					isCurrentTurn={!winner && !isDraw && currentPlayer === "yellow"}
-					isWinner={winner === "yellow"}
-				/>
-			</div>
+			<PlayerScore
+				player="red"
+				wins={redWins}
+				isCurrentTurn={!winner && !isDraw && currentPlayer === "red"}
+				isWinner={winner === "red"}
+			/>
+			<PlayerScore
+				player="yellow"
+				wins={yellowWins}
+				isCurrentTurn={!winner && !isDraw && currentPlayer === "yellow"}
+				isWinner={winner === "yellow"}
+			/>
 			{(winner || isDraw) && (
 				<div
 					css={{
-						fontSize: 18,
-						fontWeight: 600,
-						color: "#FFFBF0",
-						padding: "8px 16px",
-						backgroundColor: "rgba(255, 255, 255, 0.1)",
-						borderRadius: 8,
+						padding: "12px 16px",
+						backgroundColor: winner ? COLORS[winner] : THEME.panel,
+						border: `4px solid ${THEME.border}`,
+						boxShadow: `4px 4px 0 ${THEME.border}`,
+						textAlign: "center",
 					}}
 				>
-					{isDraw
-						? "It's a Draw!"
-						: `${winner === "red" ? "Red" : "Yellow"} Wins!`}
+					<div
+						css={{
+							fontSize: 14,
+							fontWeight: 900,
+							textTransform: "uppercase",
+							letterSpacing: 1,
+						}}
+						style={{
+							color: winner ? THEME.panel : THEME.textLight,
+						}}
+					>
+						{isDraw ? "Draw!" : "Winner!"}
+					</div>
 				</div>
 			)}
 		</div>

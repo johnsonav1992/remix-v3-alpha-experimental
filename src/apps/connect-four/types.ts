@@ -14,6 +14,12 @@ export interface WinInfo {
 	positions: Position[];
 }
 
+export interface FallingPiece {
+	col: number;
+	targetRow: number;
+	player: Player;
+}
+
 export interface GameState {
 	board: Board;
 	currentPlayer: Player;

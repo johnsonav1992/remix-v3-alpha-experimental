@@ -1,4 +1,4 @@
-import { CELL_SIZE, COLORS, EMPTY_CELL_COLOR } from "../constants";
+import { CELL_SIZE, COLORS, THEME } from "../constants";
 import type { CellValue } from "../types";
 
 interface CellProps {
@@ -40,7 +40,7 @@ export const Cell = () => {
 							? COLORS[value]
 							: showPreview
 								? COLORS[previewPlayer]
-								: EMPTY_CELL_COLOR,
+								: THEME.panel,
 						opacity: showPreview ? 0.4 : 1,
 						boxShadow: value
 							? isWinning

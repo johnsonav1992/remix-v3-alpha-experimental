@@ -1,4 +1,4 @@
-import { BOARD_COLOR, COLORS } from "../constants";
+import { COLORS, THEME } from "../constants";
 
 interface StartMenuProps {
 	onStart: () => void;
@@ -12,32 +12,44 @@ export const StartMenu = () => {
 				flexDirection: "column",
 				alignItems: "center",
 				justifyContent: "center",
-				gap: 32,
-				minHeight: 400,
+				height: "100vh",
+				width: "100vw",
+				overflow: "hidden",
+				backgroundColor: THEME.background,
+				backgroundImage:
+					"repeating-linear-gradient(45deg, transparent, transparent 35px, rgba(41,128,185,.03) 35px, rgba(41,128,185,.03) 70px)",
+				fontFamily: '"Space Grotesk", system-ui, sans-serif',
 			}}
 		>
+			<h1
+				css={{
+					fontSize: 56,
+					fontWeight: 900,
+					margin: 0,
+					marginBottom: 40,
+					color: THEME.text,
+					textTransform: "uppercase",
+					letterSpacing: -3,
+				}}
+			>
+				Connect Four
+			</h1>
 			<div
 				css={{
 					display: "flex",
 					flexDirection: "column",
-					alignItems: "center",
-					gap: 8,
+					gap: 24,
+					padding: 32,
+					backgroundColor: THEME.panel,
+					border: `4px solid ${THEME.border}`,
+					boxShadow: `8px 8px 0 ${THEME.border}`,
+					minWidth: 280,
 				}}
 			>
-				<h1
-					css={{
-						fontSize: 48,
-						fontWeight: 700,
-						color: "#FFFBF0",
-						margin: 0,
-						textShadow: "0 4px 8px rgba(0, 0, 0, 0.3)",
-					}}
-				>
-					Connect Four
-				</h1>
 				<div
 					css={{
 						display: "flex",
+						justifyContent: "center",
 						gap: 8,
 					}}
 				>
@@ -46,74 +58,58 @@ export const StartMenu = () => {
 							<div
 								key={i}
 								css={{
-									width: 20,
-									height: 20,
+									width: 24,
+									height: 24,
 									borderRadius: "50%",
-									boxShadow: "inset 0 -2px 4px rgba(0, 0, 0, 0.3)",
+									border: `3px solid ${THEME.border}`,
 								}}
 								style={{ backgroundColor: color }}
 							/>
 						),
 					)}
 				</div>
-			</div>
-			<div
-				css={{
-					display: "flex",
-					flexDirection: "column",
-					alignItems: "center",
-					gap: 16,
-					padding: 24,
-					backgroundColor: "rgba(255, 255, 255, 0.05)",
-					borderRadius: 12,
-				}}
-			>
 				<div
 					css={{
-						fontSize: 16,
-						color: "#FFFBF0",
-						opacity: 0.8,
+						fontSize: 14,
+						color: "#57606F",
 						textAlign: "center",
 						lineHeight: 1.6,
 					}}
 				>
-					Drop your pieces to connect four in a row!
+					Drop pieces to connect four in a row!
 					<br />
-					Click a column or press 1-7 to drop.
+					Click a column or press 1-7.
 				</div>
 				<button
 					type="button"
 					on={{ click: onStart }}
 					css={{
-						padding: "16px 48px",
-						fontSize: 20,
+						padding: "16px 32px",
+						fontSize: 18,
 						fontWeight: 700,
-						color: "#FFFBF0",
-						backgroundColor: BOARD_COLOR,
-						border: "none",
-						borderRadius: 8,
+						textTransform: "uppercase",
+						letterSpacing: 1,
+						backgroundColor: THEME.accent,
+						color: THEME.textLight,
+						border: `4px solid ${THEME.border}`,
+						boxShadow: `4px 4px 0 ${THEME.border}`,
 						cursor: "pointer",
-						transition: "all 0.2s ease",
-						boxShadow: "0 4px 12px rgba(0, 0, 0, 0.3)",
+						transition: "all 0.1s ease",
+						marginTop: 8,
 						"&:hover": {
-							transform: "translateY(-2px)",
-							boxShadow: "0 6px 16px rgba(0, 0, 0, 0.4)",
+							transform: "translate(-2px, -2px)",
+							boxShadow: `6px 6px 0 ${THEME.border}`,
 						},
 						"&:active": {
-							transform: "translateY(0)",
+							transform: "translate(2px, 2px)",
+							boxShadow: `2px 2px 0 ${THEME.border}`,
 						},
 					}}
 				>
 					Start Game
 				</button>
-				<div
-					css={{
-						fontSize: 14,
-						color: "#FFFBF0",
-						opacity: 0.6,
-					}}
-				>
-					Press SPACE or ENTER to start
+				<div css={{ fontSize: 12, color: "#57606F", textAlign: "center" }}>
+					Press Enter or Space to start
 				</div>
 			</div>
 		</div>

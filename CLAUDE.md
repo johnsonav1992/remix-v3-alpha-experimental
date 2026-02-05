@@ -14,3 +14,4 @@
 - Split components logically - don't put everything in one file
 - Use the two-phase pattern: setup phase runs once, render phase runs on updates
 - Use `css` prop for static styles, `style` prop for dynamic styles
+- Remix jsx components work just like React, just call the component functions by making them have the JSX syntax
