@@ -8,7 +8,8 @@
 	},
 	"formatter": {
 		"enabled": true,
-		"indentStyle": "tab"
+		"indentStyle": "tab",
+		"attributePosition": "multiline"
 	},
 	"linter": {
 		"enabled": true,

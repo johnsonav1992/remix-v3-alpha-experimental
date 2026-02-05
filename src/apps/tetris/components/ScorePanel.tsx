@@ -13,9 +13,18 @@ export const ScorePanel = () => {
 				gap: "16px",
 			}}
 		>
-			<StatBox label="Score" value={score} />
-			<StatBox label="Level" value={level} />
-			<StatBox label="Lines" value={lines} />
+			<StatBox
+				label="Score"
+				value={score}
+			/>
+			<StatBox
+				label="Level"
+				value={level}
+			/>
+			<StatBox
+				label="Lines"
+				value={lines}
+			/>
 		</div>
 	);
 };

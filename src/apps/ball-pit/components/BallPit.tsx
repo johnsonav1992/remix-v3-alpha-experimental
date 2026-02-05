@@ -33,12 +33,14 @@ export function BallPit(handle: Handle) {
 
 		balls.forEach((ball) => {
 			if (ball.sleeping) return;
+
 			ball.vy += PHYSICS.gravity;
 			ball.vx *= PHYSICS.friction;
 			ball.vy *= PHYSICS.friction;
 			dampVelocity(ball);
 			ball.x += ball.vx;
 			ball.y += ball.vy;
+
 			if (ball.x - ball.radius < 0) {
 				ball.x = ball.radius;
 				ball.vx = Math.abs(ball.vx) * PHYSICS.bounce;
@@ -46,6 +48,7 @@ export function BallPit(handle: Handle) {
 				ball.x = width - ball.radius;
 				ball.vx = -Math.abs(ball.vx) * PHYSICS.bounce;
 			}
+
 			if (ball.y - ball.radius < 0) {
 				ball.y = ball.radius;
 				ball.vy = Math.abs(ball.vy) * PHYSICS.bounce;
@@ -53,9 +56,12 @@ export function BallPit(handle: Handle) {
 				ball.y = height - ball.radius;
 				ball.vy = -Math.abs(ball.vy) * PHYSICS.bounce;
 			}
+
 			const isMoving = Math.abs(ball.vx) > 0.05 || Math.abs(ball.vy) > 0.05;
+
 			if (!isMoving) {
 				ball.sleepCounter++;
+
 				if (ball.sleepCounter > 5) {
 					ball.sleeping = true;
 					ball.vx = 0;
@@ -65,29 +71,33 @@ export function BallPit(handle: Handle) {
 				ball.sleepCounter = 0;
 			}
 		});
+
 		checkBallCollisions(balls);
 	};
 
 	const animate = (): void => {
 		updateBalls();
+
 		const anyAwake = balls.some((ball) => !ball.sleeping);
+
 		if (anyAwake) {
 			handle.update();
 		}
+
 		animationFrameId = requestAnimationFrame(animate);
 	};
 
 	const startAnimation = (): void => {
-		if (animationFrameId === null) {
-			animationFrameId = requestAnimationFrame(animate);
-		}
+		if (animationFrameId !== null) return;
+
+		animationFrameId = requestAnimationFrame(animate);
 	};
 
 	const stopAnimation = (): void => {
-		if (animationFrameId !== null) {
-			cancelAnimationFrame(animationFrameId);
-			animationFrameId = null;
-		}
+		if (animationFrameId === null) return;
+
+		cancelAnimationFrame(animationFrameId);
+		animationFrameId = null;
 	};
 
 	handle.signal.addEventListener("abort", stopAnimation);

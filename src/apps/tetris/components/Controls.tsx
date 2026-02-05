@@ -21,11 +21,26 @@ export const Controls = () => {
 				Controls
 			</div>
 			<div css={{ display: "flex", flexDirection: "column", gap: "6px" }}>
-				<ControlRow keys="← →" action="Move" />
-				<ControlRow keys="↓" action="Soft Drop" />
-				<ControlRow keys="↑" action="Rotate" />
-				<ControlRow keys="Space" action="Hard Drop" />
-				<ControlRow keys="P" action="Pause" />
+				<ControlRow
+					keys="← →"
+					action="Move"
+				/>
+				<ControlRow
+					keys="↓"
+					action="Soft Drop"
+				/>
+				<ControlRow
+					keys="↑"
+					action="Rotate"
+				/>
+				<ControlRow
+					keys="Space"
+					action="Hard Drop"
+				/>
+				<ControlRow
+					keys="P"
+					action="Pause"
+				/>
 			</div>
 		</div>
 	);

@@ -40,7 +40,10 @@ export const NextPiece = () => {
 					}}
 				>
 					{shape.map((row, y) => (
-						<div key={y} css={{ display: "flex", gap: "2px" }}>
+						<div
+							key={y}
+							css={{ display: "flex", gap: "2px" }}
+						>
 							{row.map((cell, x) => (
 								<div
 									key={x}
