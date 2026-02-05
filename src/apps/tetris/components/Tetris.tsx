@@ -75,7 +75,7 @@ export const Tetris = (handle: Handle) => {
 		if (state.gameOver) stopGameLoop();
 	};
 
-	const gameLoop = (timestamp: number): void => {
+	const gameLoop: FrameRequestCallback = (timestamp) => {
 		if (!paused && !state.gameOver) {
 			const speed = LEVEL_SPEEDS[state.level] || 100;
 
