@@ -1,7 +1,7 @@
 export const CUBIE_SIZE = 60;
-export const CUBIE_GAP = 4;
-export const BORDER_RADIUS = 8;
-export const STICKER_INSET = 6;
+export const CUBIE_GAP = 1;
+export const BORDER_RADIUS = 6;
+export const STICKER_INSET = 4;
 
 export const ANIMATION_DURATION = 300;
 

@@ -61,6 +61,66 @@ const rotatePositionAroundAxis = (
 	}
 };
 
+const rotateColorsAroundAxis = (
+	colors: { [K in Face]?: Color },
+	axis: "x" | "y" | "z",
+	direction: 1 | -1,
+): { [K in Face]?: Color } => {
+	const newColors: { [K in Face]?: Color } = {};
+
+	if (axis === "y") {
+		if (direction === -1) {
+			if (colors.R) newColors.B = colors.R;
+			if (colors.F) newColors.R = colors.F;
+			if (colors.L) newColors.F = colors.L;
+			if (colors.B) newColors.L = colors.B;
+			if (colors.U) newColors.U = colors.U;
+			if (colors.D) newColors.D = colors.D;
+		} else {
+			if (colors.R) newColors.F = colors.R;
+			if (colors.F) newColors.L = colors.F;
+			if (colors.L) newColors.B = colors.L;
+			if (colors.B) newColors.R = colors.B;
+			if (colors.U) newColors.U = colors.U;
+			if (colors.D) newColors.D = colors.D;
+		}
+	} else if (axis === "x") {
+		if (direction === -1) {
+			if (colors.F) newColors.U = colors.F;
+			if (colors.U) newColors.B = colors.U;
+			if (colors.B) newColors.D = colors.B;
+			if (colors.D) newColors.F = colors.D;
+			if (colors.R) newColors.R = colors.R;
+			if (colors.L) newColors.L = colors.L;
+		} else {
+			if (colors.F) newColors.D = colors.F;
+			if (colors.D) newColors.B = colors.D;
+			if (colors.B) newColors.U = colors.B;
+			if (colors.U) newColors.F = colors.U;
+			if (colors.R) newColors.R = colors.R;
+			if (colors.L) newColors.L = colors.L;
+		}
+	} else {
+		if (direction === -1) {
+			if (colors.U) newColors.R = colors.U;
+			if (colors.R) newColors.D = colors.R;
+			if (colors.D) newColors.L = colors.D;
+			if (colors.L) newColors.U = colors.L;
+			if (colors.F) newColors.F = colors.F;
+			if (colors.B) newColors.B = colors.B;
+		} else {
+			if (colors.U) newColors.L = colors.U;
+			if (colors.L) newColors.D = colors.L;
+			if (colors.D) newColors.R = colors.D;
+			if (colors.R) newColors.U = colors.R;
+			if (colors.F) newColors.F = colors.F;
+			if (colors.B) newColors.B = colors.B;
+		}
+	}
+
+	return newColors;
+};
+
 export const rotateFace = (cubies: CubieData[], face: Face): CubieData[] => {
 	const config = FACE_CONFIGS[face];
 	const { axis, layer, direction } = config;
@@ -76,15 +136,13 @@ export const rotateFace = (cubies: CubieData[], face: Face): CubieData[] => {
 			direction,
 		);
 
-		const newRotation = { ...cubie.rotation };
-		if (axis === "x") newRotation.x += 90 * direction;
-		else if (axis === "y") newRotation.y += 90 * direction;
-		else newRotation.z += 90 * direction;
+		const newColors = rotateColorsAroundAxis(cubie.colors, axis, direction);
 
 		return {
 			...cubie,
 			position: newPosition,
-			rotation: newRotation,
+			rotation: { x: 0, y: 0, z: 0 },
+			colors: newColors,
 		};
 	});
 };
