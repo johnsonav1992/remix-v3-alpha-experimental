@@ -222,10 +222,16 @@ export const Board = () => {
 									}}
 								>
 									{value && (
-										<Piece player={value} isWinning={isWinning} />
+										<Piece
+											player={value}
+											isWinning={isWinning}
+										/>
 									)}
 									{showPreview && (
-										<Piece player={currentPlayer} isPreview />
+										<Piece
+											player={currentPlayer}
+											isPreview
+										/>
 									)}
 								</div>
 							);

@@ -1,5 +1,6 @@
 import { BallIcon } from "../apps/ball-pit/components/BallIcon";
 import { ConnectFourIcon } from "../apps/connect-four/components/ConnectFourIcon";
+import { RubiksCubeIcon } from "../apps/rubiks-cube/components/RubiksCubeIcon";
 import { TetrisIcon } from "../apps/tetris/components/TetrisIcon";
 import type { Demo } from "../shared/types";
 
@@ -27,5 +28,13 @@ export const DEMOS: Demo[] = [
 			"Drop pieces to connect four in a row! Play against a friend using mouse clicks or keys 1-7.",
 		color: "#2980B9",
 		icon: ConnectFourIcon,
+	},
+	{
+		id: "rubiks-cube",
+		name: "Rubik's Cube",
+		description:
+			"Solve the classic 3D puzzle! Drag to rotate the cube or drag on a face to turn it.",
+		color: "#E74C3C",
+		icon: RubiksCubeIcon,
 	},
 ];

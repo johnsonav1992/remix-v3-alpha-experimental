@@ -15,3 +15,5 @@
 - Use the two-phase pattern: setup phase runs once, render phase runs on updates
 - Use `css` prop for static styles, `style` prop for dynamic styles
 - Remix jsx components work just like React, just call the component functions by making them have the JSX syntax
+- **NEVER pre-call components** - Use `<MyComponent />` directly in JSX, NOT `const C = MyComponent(); <C />`
+- **NO components defined inside render functions** - Define all components at the module level, never inside the render phase

@@ -31,13 +31,41 @@ export const ConnectFourIcon = () => {
 				padding: 2,
 			}}
 		>
-			<Piece color={COLORS.red} x={0} y={3} />
-			<Piece color={COLORS.yellow} x={1} y={3} />
-			<Piece color={COLORS.red} x={2} y={3} />
-			<Piece color={COLORS.yellow} x={3} y={3} />
-			<Piece color={COLORS.red} x={1} y={2} />
-			<Piece color={COLORS.yellow} x={2} y={2} />
-			<Piece color={COLORS.red} x={2} y={1} />
+			<Piece
+				color={COLORS.red}
+				x={0}
+				y={3}
+			/>
+			<Piece
+				color={COLORS.yellow}
+				x={1}
+				y={3}
+			/>
+			<Piece
+				color={COLORS.red}
+				x={2}
+				y={3}
+			/>
+			<Piece
+				color={COLORS.yellow}
+				x={3}
+				y={3}
+			/>
+			<Piece
+				color={COLORS.red}
+				x={1}
+				y={2}
+			/>
+			<Piece
+				color={COLORS.yellow}
+				x={2}
+				y={2}
+			/>
+			<Piece
+				color={COLORS.red}
+				x={2}
+				y={1}
+			/>
 		</div>
 	);
 };
